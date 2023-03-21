@@ -1,0 +1,21 @@
+{
+  "name": "labcommerce-back",
+  "version": "1.0.0",
+  "description": "Exercicio Labcommerce",
+  "main": "index.js",
+  "scripts": {
+    "joguinho":"node ./joguinho.js",
+    "index": "node ./index.js", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sstephanier/labcommerce-back.git"
+  },
+  "author": "Stephanie Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sstephanier/labcommerce-back/issues"
+  },
+  "homepage": "https://github.com/sstephanier/labcommerce-back#readme"
+}
