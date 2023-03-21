@@ -1,21 +1,25 @@
 {
   "name": "labcommerce-back",
   "version": "1.0.0",
-  "description": "Exercicio Labcommerce",
+  "description": "- Criando o pckage.json",
   "main": "index.js",
   "scripts": {
-    "joguinho":"node ./joguinho.js",
-    "index": "node ./index.js", 
+    "start": "tsc && node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
+    
+    "type": "module",
     "url": "git+https://github.com/sstephanier/labcommerce-back.git"
   },
-  "author": "Stephanie Rodrigues",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sstephanier/labcommerce-back/issues"
   },
-  "homepage": "https://github.com/sstephanier/labcommerce-back#readme"
+  "homepage": "https://github.com/sstephanier/labcommerce-back#readme",
+  "devDependencies": {
+    "typescript": "^5.0.2"
+  }
 }
