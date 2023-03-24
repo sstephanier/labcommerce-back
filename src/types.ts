@@ -1,3 +1,5 @@
+import { CATEGORIA } from "./enum"
+
 export type TUser = {
     id: string
     email: string
@@ -8,7 +10,7 @@ export type TProduct = {
     id: string
     name: string
     price: number | undefined
-    category: string
+    category: CATEGORIA
 }
 
 export type TPurchase = {
@@ -17,3 +19,9 @@ export type TPurchase = {
     quantity: number
     totalPrice: number | undefined
 }
+
+// enum CATEGORIA {
+//     ACESSORIOS = "Acessórios",
+//     ROUPAS = "Roupas",
+//     CALCADOS = "Calçados"
+// }
