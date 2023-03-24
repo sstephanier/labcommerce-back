@@ -5,7 +5,10 @@ import { purchase,
          getAllUsers, 
          createProduct, 
          getProductById,
-         getAllProducts } from "./database"
+         getAllProducts, 
+         queryProductsByName,
+         createPurchase,
+         getAllPurchasesFromUserId} from "./database"
 import { CATEGORIA } from "./enum";
 
 
@@ -17,8 +20,14 @@ import { CATEGORIA } from "./enum";
 
 // getAllUsers()
 
-// createProduct("2", "sandália", 50, CATEGORIA.CALCADOS)
+// createProduct("1", "calça", 80, CATEGORIA.ROUPAS)
 
-getAllProducts ()
+// getAllProducts ()
 
-getProductById("1")
+// getProductById("1")
+
+// queryProductsByName("CALÇA")
+
+// createPurchase( user[2].id,product[1].id,5,product[1].price * 1)
+
+getAllPurchasesFromUserId("Ste")
