@@ -5,6 +5,7 @@ const users: TUser[] = []
 const products: TProduct[] = []
 const purchases: TPurchase[] = []
 
+//Exercicio 1
 export const user: TUser[] = [
     {
         id: "Ste",
@@ -42,12 +43,6 @@ export function getAllUsers (): void {
 
 
 //product
-
-// CreateProduct (cria um novo produto na lista de products)
-// input: quatro parâmetros (id, name, price e category)
-// output: frase de sucesso ("Produto criado com sucesso")
-// exemplo de chamada: createProduct("p004", "Monitor HD", 800, PRODUCT_CATEGORY.ELECTRONICS)
-
 export const product: TProduct[] = [
     {
         id: "1",
@@ -65,20 +60,23 @@ export const product: TProduct[] = [
     },
     ]
 
-function productExist (id: string): boolean {
-    return product.some(prod => prod.id === id);
-} 
-
-export function createProduct (id:string, name:string, price:number, category:CATEGORIA): void {
-    if (productExist(id)) {
-        console.log("Produto já existe");
-        return;
-      } else {    
-        console.log("Produto Cadastrado") 
-        console.log("Produto: ", products)
-}
-}
-
+export const createProduct = (id:string, name:string, price:number, category:CATEGORIA): void => {
+        const productExist = product.find((prod) => {
+            return prod.id === id 
+        })
+        if (productExist) {
+            console.log("Produto já existe");
+          } else {
+            product.push({
+                id,
+                name,
+                price,
+                category
+            })  
+            console.log("Produto Cadastrado") 
+            console.log("Produto: ", product)
+    }
+    }
 export const getAllProducts = (): void => {
     const allProducts = product.map((prod) => {
         return prod.name
@@ -98,16 +96,6 @@ export const getProductById = (id: string): void => {
 
 }
 
-
-
-
-// enum CATEGORIA {
-//     ACESSORIOS = "Acessórios",
-//     ROUPAS = "Roupas",
-//     CALCADOS = "Calçados"
-// }
-
-
 export const purchase: TPurchase[] = [
 {
     userId: user[0].id,
@@ -122,3 +110,73 @@ export const purchase: TPurchase[] = [
     totalPrice: product[1].price * 3
 }
 ]
+
+//Exercício 3
+// export function queryProductsByName(name: string) {
+//     const queryProduct = product.find((prod) => prod.name === name);
+//     if (queryProduct) {
+//       console.log(queryProduct);
+//     } else {
+//       console.log("Produto não encontrado");
+//     }
+//   }
+  
+// export function queryProductsByName(q: string) {
+//     for (let i = 0; i < product.length; i++) {
+//       const prod = product[i];
+//       if (prod.name === q) {
+//         console.log(prod);
+//         return;
+//       }
+//     }
+//     console.log("Produto não encontrado");
+//   }
+
+export function queryProductsByName(q: string): void {
+    const lowercaseQ = q.toLowerCase();
+    for (let i = 0; i < product.length; i++) {
+      const prod = product[i];
+      const lowercaseName = prod.name.toLowerCase();
+      if (lowercaseName === lowercaseQ) {
+        console.log(prod);
+        return;
+      }
+    }
+    console.log("Produto não encontrado");
+  }
+export function createPurchase (userId:string, productId:string, quantity:number, totalPrice:number): void {
+    const newPurchase = {
+        userId, 
+        productId, 
+        quantity,  
+        totalPrice
+    }
+    purchases.push(newPurchase)
+    console.log(newPurchase)
+    console.log("Compra realizada com sucesso");
+  }
+
+ export function getAllPurchasesFromUserId(userIdToSearch: string): void {
+    const purchasesByUserId = purchase
+    .filter((p) => p.userId === userIdToSearch)
+    .map ((purchase) => purchase.productId)
+
+    if (purchasesByUserId.length !== 0) {
+            const useProducts = product.filter((prod) => 
+            purchasesByUserId.includes(prod.id))
+
+      console.log(useProducts);
+    } else {
+      console.log("Produto não encontrado")
+    }
+  }
+
+// Mais Resumido
+//   export function getAllPurchasesFromUserId(userIdToSearch: string): void {
+//     const purchasesByUserId = purchase
+//       .filter(({ userId }) => userId === userIdToSearch)
+//       .map(({ productId }) => productId);
+//     const useProducts = product.filter(({ id }) => purchasesByUserId.includes(id));
+//     console.log(useProducts.length > 0 ? (useProducts) : "Produto não encontrado");
+//   }
+  
