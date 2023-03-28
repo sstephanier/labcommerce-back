@@ -1,6 +1,6 @@
 # Observações sobre as funções utilizadas
 
-- O trecho de código user.some(use => use.id === id) verifica se existe pelo menos um usuário no array user com o ID fornecido na chamada da função createUser. Se existir um usuário com esse ID, a função userExists retorna true, indicando que o usuário já existe. Se não existir nenhum usuário com esse ID, a função userExists retorna false, indicando que o usuário não existe ainda.
+- O trecho de código `user.some(use => use.id === id)` verifica se existe pelo menos um usuário no array user com o ID fornecido na chamada da função createUser. Se existir um usuário com esse ID, a função userExists retorna true, indicando que o usuário já existe. Se não existir nenhum usuário com esse ID, a função userExists retorna false, indicando que o usuário não existe ainda.
 
 - A função utiliza o método "map" de JavaScript para percorrer cada objeto de usuário na lista "user" e criar uma nova lista contendo apenas o endereço de e-mail de cada usuário. O resultado é armazenado na variável "userEmail", que não é retornada pela função.
 
@@ -9,7 +9,7 @@ https://github.com/labenuexercicios/typescript-II-exercicios.git
 
 - Em "queryProductsByName(q:string)" Foi usado um loop for para iterar sobre cada produto no array product. Se o nome do produto corresponder à consulta `q`, imprimimos o produto na tela usando console.log(prod) e retornamos imediatamente usando return. Se nenhum produto corresponder à consulta, saímos do loop e imprimimos "Produto não encontrado" usando console.log("Produto não encontrado").
 
--A instrução `return` é usada para sair da função assim que um produto correspondente é encontrado, para evitar iterar sobre o resto do array desnecessariamente.
+- A instrução `return` é usada para sair da função assim que um produto correspondente é encontrado, para evitar iterar sobre o resto do array desnecessariamente.
 
 # Explicando a última parte do exercício 3
 
