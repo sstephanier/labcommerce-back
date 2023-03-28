@@ -1,23 +1,50 @@
 import { TUser, TProduct, TPurchase } from "./types"
 import { CATEGORIA } from "./enum"
+import express, { Request, Response } from 'express'
+import cors from 'cors';
 
 const users: TUser[] = []
 const products: TProduct[] = []
 const purchases: TPurchase[] = []
 
-//Exercicio 1
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+
+
+//user
 export const user: TUser[] = [
     {
-        id: "Ste",
+        id: "u001",
         email: "ste@labenu",
         password: "123mudar"
     },
     {
-        id: "Maria",
+        id: "u002",
         email: "maria@labenu",
         password: "mudar321"
     },
     ]
+
+//product
+export const product: TProduct[] = [
+    {
+        id: "p1",
+        name: "calca",
+        price: 80, 
+        category: CATEGORIA.ROUPAS
+    
+    },
+    {
+        id: "p2",
+        name: "sandalia",
+        price: 50, 
+        category: CATEGORIA.CALCADOS
+    
+    },
+    ]
+
 //user
 function userExists(id: string): boolean {
     // Verifica se já existe um usuário com o ID fornecido no array
@@ -42,23 +69,7 @@ export function getAllUsers (): void {
 }
 
 
-//product
-export const product: TProduct[] = [
-    {
-        id: "1",
-        name: "calça",
-        price: 80, 
-        category: CATEGORIA.ROUPAS
-    
-    },
-    {
-        id: "2",
-        name: "sandália",
-        price: 50, 
-        category: CATEGORIA.CALCADOS
-    
-    },
-    ]
+
 
 export const createProduct = (id:string, name:string, price:number, category:CATEGORIA): void => {
         const productExist = product.find((prod) => {
