@@ -88,3 +88,8 @@ Para testar a rota de edição de produto, segui os seguintes passos no Postman:
     "category": "Roupas"
 }
 ```
+# Link da API Publicada
+
+- https://documenter.getpostman.com/view/25826649/2s93RWMqJf
+
+- Feito para o Projeto Labenu por Maria Stephanie Rodrigues Pereira
