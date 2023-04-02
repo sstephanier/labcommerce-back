@@ -45,7 +45,8 @@ export const product: TProduct[] = [
     },
     ]
 
-//user
+
+//usuário
 function userExists(id: string): boolean {
     // Verifica se já existe um usuário com o ID fornecido no array
     return user.some(use => use.id === id);
