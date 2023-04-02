@@ -144,8 +144,10 @@ app.delete("/user/:id", (req: Request, res: Response) => {
     } else {
       res.status(404).send("Produto não encontrado");
     }
-  });
+  })
+
 // método PUT para Edit
+
 //Edit User by id
 app.put("/user/:id", (req: Request, res: Response) => {
     const id = req.params.id
