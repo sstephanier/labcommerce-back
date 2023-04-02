@@ -16,12 +16,12 @@ app.use(cors());
 //user
 export const user: TUser[] = [
     {
-        id: "u001",
+        id: "1",
         email: "ste@labenu",
         password: "123mudar"
     },
     {
-        id: "u002",
+        id: "2",
         email: "maria@labenu",
         password: "mudar321"
     },
