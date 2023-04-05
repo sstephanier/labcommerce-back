@@ -66,3 +66,50 @@ LIMIT 20;
 SELECT * FROM products
 WHERE price >= 100 AND price <= 300
 ORDER BY price ASC;
+
+-- Relações SQL
+-- Create Purchase
+CREATE TABLE purchases (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    total_price REAL NOT NULL,
+    paid INTEGER NOT NULL,
+    delivered_at TEXT,
+    buyer_id TEXT NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES users (id)
+);
+
+-- Insert Purchase
+INSERT INTO purchases 
+VALUES ("1", 150.50, 0, NULL, "1"),
+       ("2", 80.00, 1, "2023-03-31 10:30:00", "3"),
+       ("3", 250.00, 0, NULL, "2");
+
+SELECT * FROM purchases;
+
+--Exercício 2
+
+-- Inserir dois pedidos para cada usuário
+INSERT INTO purchases VALUES 
+    ("p1", 120.50, 0, NULL, "1"), 
+    ("p2", 250.00, 0, NULL, "1"),
+    ("p3", 85.00, 0, NULL, "2"),
+    ("p4", 150.00, 0, NULL, "2"),
+    ("p5", 50.00, 0, NULL, "3"),
+    ("p6", 180.00, 0, NULL, "3");
+
+-- Editar o status da data de entrega de um pedido
+UPDATE purchases SET delivered_at = DATETIME('now') WHERE id = "p2";
+
+SELECT * FROM purchases;
+
+-- Ex 3
+
+SELECT 
+purchases.id, 
+purchases.total_price, 
+purchases.paid, 
+purchases.delivered_at, 
+users.email
+FROM purchases
+JOIN users ON purchases.buyer_id = users.id
+WHERE purchases.buyer_id = "1";
