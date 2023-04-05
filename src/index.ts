@@ -222,12 +222,12 @@ app.post("/purchase", (req: Request, res: Response) => {
         throw new Error("Produto não encontrado");
       }
       
-      const totalPurchasePrice = productPrice.price * quantity;
-
-      if (totalPurchasePrice > productPrice.price) {
-        res.status(400).send("Valor total da compra é maior que o preço do produto");
-        return;
-      }
+      // const totalPurchasePrice = productPrice.price * quantity;
+      // console.log(totalPurchasePrice)
+      // if (totalPurchasePrice !== productPrice.price) {
+      //   res.status(400).send("Valor total da compra é diferente que o preço do produto");
+      //   return;
+      // }
 
       // Calcula o preço total da compra
       const totalPrice = quantity * productPrice.price;
