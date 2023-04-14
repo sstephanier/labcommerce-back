@@ -146,3 +146,11 @@ VALUES
 SELECT * FROM purchases_products;
 
 DROP Table purchases_products;
+
+-- Consulta com junção INNER-JOIN
+SELECT purchases_products.purchase_id, purchases_products.product_id, purchases_products.quantity,
+       purchases.total_price, purchases.paid, purchases.delivered_at,
+       products.name, products.price, products.category
+FROM purchases_products
+INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
+INNER JOIN products ON purchases_products.product_id = products.id;
