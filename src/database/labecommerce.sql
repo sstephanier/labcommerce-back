@@ -78,6 +78,8 @@ CREATE TABLE purchases (
     FOREIGN KEY (buyer_id) REFERENCES users (id)
 );
 
+DROP TABLE purchases;
+
 -- Insert Purchase
 INSERT INTO purchases 
 VALUES ("1", 150.50, 0, NULL, "1"),
@@ -89,13 +91,15 @@ SELECT * FROM purchases;
 --Exercício 2
 
 -- Inserir dois pedidos para cada usuário
-INSERT INTO purchases VALUES 
+INSERT INTO purchases
+     VALUES 
     ("p1", 120.50, 0, NULL, "1"), 
     ("p2", 250.00, 0, NULL, "1"),
     ("p3", 85.00, 0, NULL, "2"),
     ("p4", 150.00, 0, NULL, "2"),
     ("p5", 50.00, 0, NULL, "3"),
     ("p6", 180.00, 0, NULL, "3");
+
 
 -- Editar o status da data de entrega de um pedido
 UPDATE purchases SET delivered_at = DATETIME('now') WHERE id = "p2";
@@ -111,5 +115,42 @@ purchases.paid,
 purchases.delivered_at, 
 users.email
 FROM purchases
-JOIN users ON purchases.buyer_id = users.id
+INNER JOIN users ON purchases.buyer_id = users.id
 WHERE purchases.buyer_id = "1";
+
+SELECT id, total_price, 
+CASE 
+WHEN paid = 1 
+THEN 'paid' 
+ELSE 'not paid' 
+END AS status, delivered_at, buyer_id 
+FROM purchases;
+
+-- Relações SQL-II
+-- Create table purchases_products
+CREATE TABLE purchases_products (
+    purchase_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+);
+
+-- Inserção dos dados na tabela purchases_products
+INSERT INTO purchases_products (purchase_id, product_id, quantity)
+VALUES
+       ("c001", "p1", 5),
+       ("c001", "p2", 3),
+       ("c002", "p3", 2);
+
+SELECT * FROM purchases_products;
+
+DROP Table purchases_products;
+
+-- Consulta com junção INNER-JOIN
+SELECT purchases_products.purchase_id, purchases_products.product_id, purchases_products.quantity,
+       purchases.total_price, purchases.paid, purchases.delivered_at,
+       products.name, products.price, products.category
+FROM purchases_products
+INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
+INNER JOIN products ON purchases_products.product_id = products.id;
