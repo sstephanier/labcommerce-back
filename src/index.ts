@@ -574,10 +574,10 @@ app.put("/product/:id", (req: Request, res: Response) => {
         return res.status(404).json({ error: "Compra não encontrada" });
       }
   
-      const products = await db("products")
-        .innerJoin("result_items", "products.id", "result_items.product_id")
+      const elements = await db("products")
+        .innerJoin("result_items", "elements.id", "result_items.product_id")
         .where("result_items.result_id", purchaseId)
-        .select("products.*", "result_items.quantity");
+        .select("elements.*", "result_items.quantity");
   
       const purchaseWithProducts = {
         purchaseId: result.id,
@@ -587,7 +587,7 @@ app.put("/product/:id", (req: Request, res: Response) => {
         buyerId: result.buyerId,
         email: result.email,
         name: result.name,
-        productsList: products,
+        productsList: elements,
       };
   
       res.status(200).json(purchaseWithProducts);
