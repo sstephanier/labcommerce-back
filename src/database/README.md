@@ -11,3 +11,4 @@
 - A coluna "delivered_at" é opcional e pode ser deixada como NULL na inserção dos dados.
 
 - a coluna "buyer_id" é definida como FOREIGN KEY referenciando a coluna "id" da tabela "users". Isso garante que a cada compra esteja vinculada a um usuário existente na tabela "users".
+

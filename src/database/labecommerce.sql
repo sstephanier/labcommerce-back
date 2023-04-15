@@ -190,3 +190,6 @@ SELECT * FROM users;
   );
 
   SELECT * FROM purchases;
+
+INSERT INTO purchases (id, buyer, totalPrice, createdAt, paid)
+VALUES ("c6","u3", 270,"2023-04-14T10:30:00.000Z", true);
