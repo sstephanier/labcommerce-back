@@ -13,6 +13,7 @@ VALUES ("1", "ste@labenu","123mudar"),
        ("2", "maria@labenu",  "mudar321"),
        ("3", "Joao@labenu",  "joao123@");
 
+DROP TABLE users;
 --Get All Users
 SELECT * FROM users;
 
@@ -32,7 +33,7 @@ VALUES ("p1", "calca", 80, "roupas"),
 -- Get All Products 
 SELECT * FROM products;
 
-DROP TABLE users;
+DROP TABLE products;
 
 -- Search Product by name
 SELECT * FROM products
@@ -154,3 +155,38 @@ SELECT purchases_products.purchase_id, purchases_products.product_id, purchases_
 FROM purchases_products
 INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
 INNER JOIN products ON purchases_products.product_id = products.id;
+
+CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    createdAt TEXT NOT NULL
+  );
+
+INSERT INTO users (id, name, email, password, createdAt)
+VALUES ("u1","Ste" , "ste@labenu","123mudar", "2023-03-31 10:30:00"),
+       ("u2","Maria", "maria@labenu",  "mudar321", "2023-04-14 10:30:00"),
+       ("u3","João", "Joao@labenu",  "joao123@", "2023-04-14 10:30:00");
+
+DROP TABLE users;
+SELECT * FROM users;
+
+
+  CREATE TABLE IF NOT EXISTS products (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    price REAL NOT NULL,
+    description TEXT NOT NULL,
+    imageUrl TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS purchases (
+    id TEXT PRIMARY KEY NOT NULL,
+    buyer TEXT NOT NULL,
+    totalPrice REAL NOT NULL,
+    createdAt TEXT NOT NULL,
+    paid BOOLEAN NOT NULL
+  );
+
+  SELECT * FROM purchases;
