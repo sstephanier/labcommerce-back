@@ -35,7 +35,7 @@ app.get('/ping', (req: Request, res: Response) => {
 // usando try/catch
 app.get("/user", async (req: Request, res: Response) => {
     try {
-      const result = await  db.raw(`SELECT * FROM users`);
+      const result = await db("users").select("*");
       res.status(200).send(result);
     } catch (error) {
       console.log(error)
@@ -60,11 +60,11 @@ app.get("/user", async (req: Request, res: Response) => {
 
 // })
 app.get("/product", async (req: Request, res: Response) =>{
-    try {
-        const result = await db.raw(`SELECT * FROM products`);
-        res.status(200).send(result)
+  try {
+    const products = await db("products").select("*");
+    res.status(200).json(products);
     } catch (error) {
-        res.status(400).send(error.message)
+      res.status(500).send("Ocorreu um erro ao buscar os produtos.");
     }
 })
 
@@ -117,23 +117,37 @@ app.get("/product/search", async (req: Request, res: Response) => {
 //     res.status(201).send("Usuário cadastrado com sucesso!")
 // })
 app.post("/user", async (req: Request, res: Response) =>{
-    try {
-      const { id, name, email, password, createdAt } = req.body
-      // const id = req.body.id as string
-      // const email = req.body.email as string
-      // const password = req.body.password as string
-      await db("users").insert({
-        id,
-        name,
-        email,
-        password,
-        createdAt
-      });
-      res.status(201).send("Cadastro realizado com sucesso");
-    } catch (error) {
-      res.status(500).send("Ocorreu um erro ao cadastrar usuário.");
-    }
-  });
+  try {
+    const {id, name, email, password } = req.body;
+    await db("users").insert({
+      id,
+      name,
+      email,
+      password,
+      createdAt: new Date().toISOString()
+    });
+    res.status(201).send("Usuário criado com sucesso!");
+  } catch (error) {
+    res.status(500).send("Ocorreu um erro ao criar o usuário.");
+  }
+});
+  //   try {
+  //     const { id, name, email, password, createdAt } = req.body
+  //     // const id = req.body.id as string
+  //     // const email = req.body.email as string
+  //     // const password = req.body.password as string
+  //     await db("users").insert({
+  //       id,
+  //       name,
+  //       email,
+  //       password,
+  //       createdAt
+  //     });
+  //     res.status(201).send("Cadastro realizado com sucesso");
+  //   } catch (error) {
+  //     res.status(500).send("Ocorreu um erro ao cadastrar usuário.");
+  //   }
+  // });
       // Verifica se o body é válido
   //     if (!id || !email || !password) {
   //       res.status(400).send("Campos 'id', 'email' e 'password' são obrigatórios.")
@@ -549,7 +563,38 @@ app.put("/product/:id", (req: Request, res: Response) => {
       res.status(400).send(error.message);
     }
   });
-    
+
+  app.get("/purchase/:id", async (req: Request, res: Response) => {
+    try {
+      const purchaseId = req.params.id;
+      // Lógica para buscar a compra pelo ID no banco de dados usando o knex
+      const result = await db("purchases").where("id", purchaseId).first();
+  
+      if (!result) {
+        return res.status(404).json({ error: "Compra não encontrada" });
+      }
+  
+      const products = await db("products")
+        .innerJoin("result_items", "products.id", "result_items.product_id")
+        .where("result_items.result_id", purchaseId)
+        .select("products.*", "result_items.quantity");
+  
+      const purchaseWithProducts = {
+        purchaseId: result.id,
+        totalPrice: result.totalPrice,
+        createdAt: result.createdAt,
+        isPaid: result.isPaid,
+        buyerId: result.buyerId,
+        email: result.email,
+        name: result.name,
+        productsList: products,
+      };
+  
+      res.status(200).json(purchaseWithProducts);
+    } catch (error) {
+      res.status(500).send("Ocorreu um erro ao buscar a compra pelo ID.");
+    }
+  });
 
 // console.log(user);
 // console.log(product);
